@@ -7,11 +7,14 @@ using vector_float = std::vector <std::vector<float>>;
 // Класс Матрица
 class Matrix {
 	vector_float a; // двумерный массив
+	bool proverka(vector_float a, vector_float b) const;
 
 public:
 
 	static const short no_access_el = -1;
 	static const short no_access_str = -2;
+	static const short row_not_equal_col = -3;
+	static const short not_equal_matrix = -4;
 
 	// Конструкторы
 	Matrix();
@@ -24,7 +27,7 @@ public:
 	std::vector <float> get_str(unsigned i);
 
 	// Заполнение матрицы одним значением
-	void init_matrix(int num);
+	void init_matrix(float num);
 
 	// Заполнение матрицы случайными числами
 	void init_matrix();
@@ -37,4 +40,7 @@ public:
 
 	// Оператор умножения матрицы на число
 	Matrix operator * (int num) const;
+
+	// Оператор умножения двух матриц
+	Matrix operator * (const Matrix& b) const;
 };
