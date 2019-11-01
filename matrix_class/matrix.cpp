@@ -3,31 +3,32 @@
 #include <ctime>
 
 Matrix::Matrix() {
-	n = 3;
-	m = 3;
-	a.resize(n);
+	a.resize(3);
 	for (unsigned i = 0; i < a.size(); i++)
 	{
-		a[i].resize(m);
+		a[i].resize(3);
 	}
 }
 
 Matrix::Matrix(unsigned count, unsigned column) {
-		n = count;
-		m = column;
-		a.resize(n);
+		a.resize(count);
 		for (unsigned i = 0; i < a.size(); i++)
 		{
-			a[i].resize(m);
+			a[i].resize(column);
 		}
 }
 
 // Доступ к элементам матрицы
-int Matrix::get_el(unsigned i, unsigned j) {
-	if (i < m && j < n)
+float Matrix::get_el(unsigned i, unsigned j) {
+	if (i < a.size() && j < a[i].size())
 		return a[i][j];
 	else
 		throw Matrix::no_access_el;
+}
+
+std::vector<float> Matrix::get_str(unsigned i) {
+	if (i < a.size()) return a[i]; else
+		throw Matrix::no_access_str;
 }
 
 // Заполнение матрицы одним значением
@@ -50,8 +51,8 @@ void Matrix::init_matrix() {
 }
 
 // Оператор сложения двух матриц
-Matrix Matrix::operator + (Matrix& b) const {
-	Matrix result(n, m);
+Matrix Matrix::operator + (const Matrix& b) const {
+	Matrix result(a.size(), a[0].size());
 
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
@@ -62,8 +63,8 @@ Matrix Matrix::operator + (Matrix& b) const {
 }
 
 // Оператор вычитания двух матриц
-Matrix Matrix::operator - (Matrix& b) const {
-	Matrix result(n, m);
+Matrix Matrix::operator - (const Matrix& b) const {
+	Matrix result(a.size(), a[0].size());
 
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
@@ -75,7 +76,7 @@ Matrix Matrix::operator - (Matrix& b) const {
 
 // Оператор умножения матрицы на число
 Matrix Matrix::operator * (int num) const {
-	Matrix result(n, m);
+	Matrix result(a.size(), a[0].size());
 
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)

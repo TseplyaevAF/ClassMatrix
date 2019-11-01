@@ -2,23 +2,26 @@
 #include <vector>
 
 // Синоним для типа двумерный вектор
-using vector_int = std::vector <std::vector<int>>;
+using vector_float = std::vector <std::vector<float>>;
 
 // Класс Матрица
 class Matrix {
-	unsigned n, m; // n - число строк, m - число столбцов
-	vector_int a; // двумерный массив
+	vector_float a; // двумерный массив
 
 public:
 
 	static const short no_access_el = -1;
+	static const short no_access_str = -2;
 
 	// Конструкторы
 	Matrix();
 	Matrix(unsigned count, unsigned column);
 
 	// Доступ к элементам матрицы
-	int get_el(unsigned i, unsigned j);
+	float get_el(unsigned i, unsigned j);
+
+	// Доступ к строкам матрицы
+	std::vector <float> get_str(unsigned i);
 
 	// Заполнение матрицы одним значением
 	void init_matrix(int num);
@@ -27,10 +30,10 @@ public:
 	void init_matrix();
 
 	// Оператор сложения двух матриц
-	Matrix operator + (Matrix& b) const;
+	Matrix operator + (const Matrix& b) const;
 
 	// Оператор вычитания двух матриц
-	Matrix operator - (Matrix& b) const;
+	Matrix operator - (const Matrix& b) const;
 
 	// Оператор умножения матрицы на число
 	Matrix operator * (int num) const;
