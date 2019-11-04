@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 
-bool Matrix::proverka(vector_float a, vector_float b) const {
+bool Matrix::check(vector_float a, vector_float b) const {
 	if (a.size() != b.size()) return 0;
 	for (unsigned i = 0; i < a.size(); i++) {
 		if (a[i].size() != b[i].size()) return 0;
@@ -34,6 +34,7 @@ float Matrix::get_el(unsigned i, unsigned j) {
 		throw no_access_el;
 }
 
+// Доступ к строкам матрицы
 std::vector<float> Matrix::get_str(unsigned i) {
 	if (i < a.size()) return a[i]; else
 		throw no_access_str;
@@ -49,18 +50,19 @@ void Matrix::init_matrix(float num) {
 }
 
 // Заполнение матрицы случайными числами
-void Matrix::init_matrix() {
+void Matrix::init_matrix(int x, int y) {
 	srand(time(NULL));
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
 		{
-			a[i][j] = rand() % 50 + 1;
+			a[i][j] = rand() % (y - x + 1) + x;
+
 		}
 }
 
 // Оператор сложения двух матриц
 Matrix Matrix::operator + (const Matrix& b) const {
-	if (!proverka(a, b.a)) throw not_equal_matrix;
+	if (!check(a, b.a)) throw not_equal_matrix;
 
 	Matrix result(a.size(), a[0].size());
 
@@ -74,7 +76,7 @@ Matrix Matrix::operator + (const Matrix& b) const {
 
 // Оператор вычитания двух матриц
 Matrix Matrix::operator - (const Matrix& b) const {
-	if (!proverka(a, b.a)) throw not_equal_matrix;
+	if (!check(a, b.a)) throw not_equal_matrix;
 
 	Matrix result(a.size(), a[0].size());
 
@@ -98,6 +100,7 @@ Matrix Matrix::operator * (int num) const {
 	return result;
 }
 
+// Оператор умножения двух матриц
 Matrix Matrix::operator * (const Matrix& b) const {
 
 	if (a[0].size() != b.a.size()) throw row_not_equal_col;
@@ -108,4 +111,22 @@ Matrix Matrix::operator * (const Matrix& b) const {
 			for (unsigned k = 0; k < a[i].size(); k++)
 				result.a[i][j] += a[i][k] * b.a[j][k];
 	return result;
+}
+
+// Транспонирование матрицы
+void Matrix::transpose() {
+	float s;
+	for (unsigned i = 0; i < a.size(); i++)
+		for (unsigned j = i; j < a[i].size(); j++) {
+			s = a[i][j];
+			a[i][j] = a[j][i]; //строка => столбец
+			a[j][i] = s; // столбец => строка
+		}
+}
+
+// Создание диагональной матрицы
+void Matrix::diagonal() {
+	for (unsigned i = 0; i < a.size(); i++)
+		for (unsigned j = 0; j < a[i].size(); j++)
+			if (i != j) a[i][j] = 0;
 }

@@ -7,7 +7,7 @@ using vector_float = std::vector <std::vector<float>>;
 // Класс Матрица
 class Matrix {
 	vector_float a; // двумерный массив
-	bool proverka(vector_float a, vector_float b) const;
+	bool check(vector_float a, vector_float b) const;
 
 public:
 
@@ -30,7 +30,7 @@ public:
 	void init_matrix(float num);
 
 	// Заполнение матрицы случайными числами
-	void init_matrix();
+	void init_matrix(int x, int y);
 
 	// Оператор сложения двух матриц
 	Matrix operator + (const Matrix& b) const;
@@ -43,4 +43,10 @@ public:
 
 	// Оператор умножения двух матриц
 	Matrix operator * (const Matrix& b) const;
+
+	// Транспонирование матрицы
+	void transpose();
+
+	// Создание диагональной матрицы
+	void diagonal();
 };

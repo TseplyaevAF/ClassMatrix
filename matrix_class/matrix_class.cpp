@@ -9,9 +9,12 @@ int main()
 	Matrix a;
 	Matrix b;
 	Matrix c;
+	// заполнение массива одним значением
 	a.init_matrix(2);
-	b.init_matrix();
-
+	// заполнение массива случайными числами на интервале [a, b]
+	b.init_matrix(-10,10);
+	b.transpose();
+	a.diagonal();
 	c = a * 5;
 
 	float x;
