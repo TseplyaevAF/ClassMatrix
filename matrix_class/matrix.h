@@ -7,6 +7,7 @@ using vector_float = std::vector <std::vector<float>>;
 // Класс Матрица
 class Matrix {
 	vector_float a; // двумерный массив
+	// проверка матриц на эквивалентность
 	bool check(vector_float a, vector_float b) const;
 
 public:
@@ -49,4 +50,8 @@ public:
 
 	// Создание диагональной матрицы
 	void diagonal();
+
+	Matrix& operator += (const Matrix& b);
+	Matrix& operator -= (const Matrix& b);
+	Matrix& operator *= (const Matrix& b);
 };

@@ -10,16 +10,19 @@ int main()
 	Matrix b;
 	Matrix c;
 	// заполнение массива одним значением
-	a.init_matrix(2);
+	a.init_matrix(1, 8);
 	// заполнение массива случайными числами на интервале [a, b]
 	b.init_matrix(-10,10);
 	b.transpose();
-	a.diagonal();
 	c = a * 5;
 
 	float x;
 	vector<float> y;
 	try {
+		//a.diagonal();
+		//a += b;
+		//b -= a;
+		a *= b;
 		c = a + b;
 		c = a - b;
 		c = a * b;
