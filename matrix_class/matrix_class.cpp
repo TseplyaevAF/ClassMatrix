@@ -30,7 +30,7 @@ int main()
 		x = a.get_el(1, 2);
 		y = b.get_row(0);
 	}
-	catch (short e) {
+	catch (Matrix::ERRORS e) {
 		if (e == Matrix::no_access_el)
 			cout << "Элемент не существует!\n";
 		if (e == Matrix::no_access_str)

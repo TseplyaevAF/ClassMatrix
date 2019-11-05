@@ -12,10 +12,13 @@ class Matrix {
 
 public:
 
-	static const short no_access_el = -1;
-	static const short no_access_str = -2;
-	static const short row_not_equal_col = -3;
-	static const short not_equal_matrix = -4;
+	// Исключения
+	enum ERRORS{
+		no_access_el = -1,
+		no_access_str = -2,
+		row_not_equal_col = -3,
+		not_equal_matrix = -4,
+	};
 
 	// Конструкторы
 	Matrix();
