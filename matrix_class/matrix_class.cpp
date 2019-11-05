@@ -6,13 +6,14 @@ using namespace std;
 int main()
 {
 	setlocale(0, "RUS");
-	Matrix a;
+	Matrix a(2,1);
 	Matrix b;
 	Matrix c;
 	// заполнение массива одним значением
-	a.init_matrix(1, 8);
+	a.randomize(1, 8);
 	// заполнение массива случайными числами на интервале [a, b]
-	b.init_matrix(-10,10);
+	b.randomize(-10,10);
+	float determinant = b.detMatr3x3();
 	b.transpose();
 	c = a * 5;
 
@@ -27,7 +28,7 @@ int main()
 		c = a - b;
 		c = a * b;
 		x = a.get_el(1, 2);
-		y = b.get_str(0);
+		y = b.get_row(0);
 	}
 	catch (short e) {
 		if (e == Matrix::no_access_el)

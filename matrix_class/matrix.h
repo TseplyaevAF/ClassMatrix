@@ -25,13 +25,13 @@ public:
 	float get_el(unsigned i, unsigned j);
 
 	// Доступ к строкам матрицы
-	std::vector <float> get_str(unsigned i);
+	std::vector <float> get_row(unsigned i);
 
 	// Заполнение матрицы одним значением
-	void init_matrix(float num);
+	void randomize(float num);
 
 	// Заполнение матрицы случайными числами
-	void init_matrix(int x, int y);
+	void randomize(int x, int y);
 
 	// Оператор сложения двух матриц
 	Matrix operator + (const Matrix& b) const;
@@ -40,7 +40,7 @@ public:
 	Matrix operator - (const Matrix& b) const;
 
 	// Оператор умножения матрицы на число
-	Matrix operator * (int num) const;
+	Matrix operator * (float num) const;
 
 	// Оператор умножения двух матриц
 	Matrix operator * (const Matrix& b) const;
@@ -54,4 +54,5 @@ public:
 	Matrix& operator += (const Matrix& b);
 	Matrix& operator -= (const Matrix& b);
 	Matrix& operator *= (const Matrix& b);
+	float detMatr3x3(); // Определитель матрицы 3 на 3
 };

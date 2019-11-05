@@ -35,13 +35,13 @@ float Matrix::get_el(unsigned i, unsigned j) {
 }
 
 // ƒоступ к строкам матрицы
-std::vector<float> Matrix::get_str(unsigned i) {
+std::vector<float> Matrix::get_row(unsigned i) {
 	if (i < a.size()) return a[i]; else
 		throw no_access_str;
 }
 
 // «аполнение матрицы одним значением
-void Matrix::init_matrix(float num) {
+void Matrix::randomize(float num) {
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
 		{
@@ -51,7 +51,7 @@ void Matrix::init_matrix(float num) {
 
 // «аполнение матрицы случайными числами
 // в диапазоне [x, y]
-void Matrix::init_matrix(int x, int y) {
+void Matrix::randomize(int x, int y) {
 	srand(time(NULL));
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
@@ -90,7 +90,7 @@ Matrix Matrix::operator - (const Matrix& b) const {
 }
 
 // ќператор умножени€ матрицы на число
-Matrix Matrix::operator * (int num) const {
+Matrix Matrix::operator * (float num) const {
 	Matrix result(a.size(), a[0].size());
 
 	for (unsigned i = 0; i < a.size(); i++)
@@ -162,7 +162,7 @@ Matrix& Matrix::operator *= (const Matrix& b) {
 
 	float S, buf;
 	for (unsigned i = 0; i < a.size(); i++) {
-		y = get_str(i);
+		y = get_row(i);
 		for (unsigned j = 0; j < a[i].size(); j++) {
 			S = 0;
 			for (unsigned k = 0; k < a[i].size(); k++) {
@@ -172,4 +172,13 @@ Matrix& Matrix::operator *= (const Matrix& b) {
 		}
 	}
 	return *this;
+}
+
+// –асчет определител€ матрицы размерности 3x3
+float Matrix::detMatr3x3() {
+	float res;
+
+	res = ((a[0][0]*a[1][1]*a[2][2] + a[0][1]*a[1][2]*a[2][0] + a[2][1]*a[1][0]*a[0][2]) //ветка с плюсом
+		- (a[2][0]*a[1][1]*a[0][2] + a[1][0]*a[0][1]*a[2][2] + a[2][1]*a[1][2]*a[0][0])); //ветка с минусом 
+	return res;
 }
