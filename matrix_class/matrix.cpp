@@ -37,11 +37,11 @@ float Matrix::get_el(unsigned i, unsigned j) {
 // Доступ к строкам матрицы
 std::vector<float> Matrix::get_row(unsigned i) {
 	if (i < a.size()) return a[i]; else
-		throw no_access_str;
+		throw no_access_row;
 }
 
 // Заполнение матрицы одним значением
-void Matrix::randomize(float num) {
+void Matrix::init(float num) {
 	for (unsigned i = 0; i < a.size(); i++)
 		for (unsigned j = 0; j < a[i].size(); j++)
 		{
@@ -160,7 +160,7 @@ Matrix& Matrix::operator *= (const Matrix& b) {
 
 	std::vector<float> y;
 
-	float S, buf;
+	float S;
 	for (unsigned i = 0; i < a.size(); i++) {
 		y = get_row(i);
 		for (unsigned j = 0; j < a[i].size(); j++) {

@@ -33,7 +33,7 @@ int main()
 	catch (Matrix::ERRORS e) {
 		if (e == Matrix::no_access_el)
 			cout << "Элемент не существует!\n";
-		if (e == Matrix::no_access_str)
+		if (e == Matrix::no_access_row)
 			cout << "Нет доступа к строке!\n";
 		if (e == Matrix::row_not_equal_col)
 			cout << "Длина строки не равна длине стобцов!\n";

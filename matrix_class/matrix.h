@@ -15,7 +15,7 @@ public:
 	// Исключения
 	enum ERRORS{
 		no_access_el = -1,
-		no_access_str = -2,
+		no_access_row = -2,
 		row_not_equal_col = -3,
 		not_equal_matrix = -4,
 	};
@@ -31,10 +31,10 @@ public:
 	std::vector <float> get_row(unsigned i);
 
 	// Заполнение матрицы одним значением
-	void randomize(float num);
+	void init(float num);
 
 	// Заполнение матрицы случайными числами
-	void randomize(int x, int y);
+	void randomize(int limitLow, int limitHigh);
 
 	// Оператор сложения двух матриц
 	Matrix operator + (const Matrix& b) const;
